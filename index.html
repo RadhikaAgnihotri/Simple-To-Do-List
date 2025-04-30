@@ -13,7 +13,7 @@
 <body>
     <div class="container">
         <div class="todo-app">
-            <h2>To-Do List <img src="images/icon.jpg" alt=""></h2>
+            <h2>To-Do List <img src="images/todoicon.jpg" alt=""></h2>
             <div class="row">
                 <input type=" text" id="input-box" placeholder="Add your text">
                 <button onclick="addTask()">Add</button>
@@ -26,6 +26,45 @@
         </div>
 
     </div>
-<script src="script.js"></script>    
+
+<audio id="clickSound" src="click.mp3" preload="auto"></audio>
+<script src="script.js"></script>
+<script>
+    window.addEventListener('load', function () {
+      const img = document.querySelector('.todo-app h2 img');
+      img.classList.add('animate-once');
+      
+      setTimeout(() => {
+        img.classList.remove('animate-once');
+        img.classList.add('gentle-pulse');
+  
+        // Stop gentle pulse after 3 seconds
+        setTimeout(() => {
+          img.classList.remove('gentle-pulse');
+        }, 20000);
+  
+      }, 4000); // Wait until floatRotate finishes
+    });
+
+
+    window.addEventListener('load', () => {
+      const img = document.querySelector('.todo-app h2 img');
+      img.classList.add('animate-once');
+  
+      img.addEventListener('animationend', () => {
+        img.classList.remove('animate-once');
+        img.classList.add('gentle-pulse');
+      });
+    });
+
+
+    const clickSound = document.getElementById("clickSound");
+    const addButton = document.querySelector("button");
+
+    addButton.addEventListener("click", () => {
+        clickSound.currentTime = 0; 
+        clickSound.play();
+    });
+</script>
 </body>
 </html>
